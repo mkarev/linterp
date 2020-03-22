@@ -22,6 +22,7 @@ set(CMAKE_C_FLAGS                  "${CMAKE_C_FLAGS}   ${COMMON_FLAGS}")
 find_package(FFTW3f CONFIG REQUIRED)
 find_package(libpng CONFIG REQUIRED)
 find_package(JPEG REQUIRED)
+# TODO: add tiff support
 
 add_library(common STATIC
     basic.c

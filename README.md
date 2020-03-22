@@ -2,7 +2,7 @@ Linear Methods for Image Interpolation
 ======================================
 
 Link to original work: http://www.ipol.im/pub/art/2011/g_lmii/revisions/2011-09-27/g_lmii.html  
-In this repo added cmake to original sources "interp-src"  
+This repo add cmake support to original project [src.zip](http://www.ipol.im/pub/art/2011/g_lmii/src.zip)
 
 Build
 =====
@@ -15,16 +15,18 @@ Prerequisites
 Windows
 -------
 
-On windows we will use Microsoft package manager to build third-party libraries
+On windows we will use Microsoft package manager to build third-party libraries  
+**TODO**: add TIFF support
 
-  1. Install vcpkg and integrate with Visual Studio
+  1. Install vcpkg (without telemetry) and integrate it with Visual Studio
   
     git clone https://github.com/microsoft/vcpkg
     cd vcpkg
-    bootstrap-vcpkg.bat
+    bootstrap-vcpkg.bat -disableMetrics
     vcpkg integrate install
     
-   Remember hint "CMake projects should use: -DCMAKE_TOOLCHAIN_FILE=Path/To/vcpkg.cmake"
+   Remember path to vcpkg toolchain file: "CMake projects should use: `-DCMAKE_TOOLCHAIN_FILE=Path/To/vcpkg.cmake`"  
+   We will use it in step 3.
 
   2. Install packages (static versions)
   
@@ -33,11 +35,11 @@ On windows we will use Microsoft package manager to build third-party libraries
     vcpkg install libjpeg-turbo:x64-windows-static
     vcpkg install tiff:x64-windows-static
 
-  3. Build project
+  3. Build project (change cmake generator to appropriate Visual Studio version if need)
 
     mkdir build
     pushd build
-    cmake -G "Visual Studio 15" -A x64 ^
+    cmake -G "Visual Studio 16 2019" -A x64 ^
       -DVCPKG_TARGET_TRIPLET=x64-windows-static ^
       -DCMAKE_TOOLCHAIN_FILE=Path/To/vcpkg.cmake ^
       ..
